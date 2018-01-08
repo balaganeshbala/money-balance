@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="in.balaganesh.moneybalance.MainActivity">
+
+    <LinearLayout
+        android:id="@+id/main_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="#FCFCFC">
+            <TextView
+                android:text="Current Total Balance"
+                android:layout_marginLeft="20dp"
+                android:textSize="16dp"
+                android:layout_gravity="bottom"
+                android:textColor="@color/colorBlack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:background="@drawable/bottom_border_background">
+            <TextView
+                android:id="@+id/total_amount_text"
+                android:text="₹ 0.0"
+                android:layout_marginLeft="20dp"
+                android:textSize="28dp"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/colorBlack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:text="Add New"
+                android:textColor="@color/colorWhite"
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginRight="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="addNewAccount"
+                android:background="@drawable/button_blue"/>
+        </FrameLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#EDEDED"
+            android:text="Accounts"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:paddingLeft="15dp"
+            android:textColor="@color/colorBlack"
+            android:textSize="14dp" />
+
+        <FrameLayout
+            android:id="@+id/list_container"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent">
+
+            <TextView
+                android:id="@+id/no_accounts_text"
+                android:text="No Accounts Added"
+                android:textAlignment="center"
+                android:textSize="20dp"
+                android:layout_marginTop="-10dp"
+                android:textColor="#D5D5D5"
+                android:visibility="gone"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <ListView
+                android:id="@+id/list"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent">
+            </ListView>
+        </FrameLayout>
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
