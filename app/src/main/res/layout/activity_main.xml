@@ -41,11 +41,11 @@
                 android:layout_height="wrap_content" />
 
             <Button
-                android:text="Add New"
+                android:text="+ New"
                 android:textColor="@color/colorWhite"
                 android:layout_gravity="right|center_vertical"
                 android:layout_marginRight="10dp"
-                android:layout_width="wrap_content"
+                android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:onClick="addNewAccount"
                 android:background="@drawable/button_blue"/>

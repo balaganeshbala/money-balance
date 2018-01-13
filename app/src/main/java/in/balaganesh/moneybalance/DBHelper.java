@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,7 +63,7 @@ class DBHelper extends SQLiteOpenHelper {
 
         ContentValues values = new ContentValues();
         values.put(KEY_NAME, account.accountName);
-        values.put(KEY_AMOUNT, round(account.amount, 2));
+        values.put(KEY_AMOUNT, String.valueOf(round(account.amount)));
 
         // Inserting Row
         db.insert(TABLE_ACCOUNTS, null, values);
@@ -80,7 +81,7 @@ class DBHelper extends SQLiteOpenHelper {
             cursor.moveToFirst();
 
         Account account = new Account(Integer.parseInt(cursor.getString(0)),
-                cursor.getString(1), Double.parseDouble(cursor.getString(2)));
+                cursor.getString(1), cursor.getString(2));
         // return account
         return account;
     }
@@ -97,7 +98,7 @@ class DBHelper extends SQLiteOpenHelper {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-                Account account = new Account(Integer.parseInt(cursor.getString(0)), cursor.getString(1), Double.parseDouble(cursor.getString(2)));
+                Account account = new Account(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getString(2));
                 // Adding account to list
                 accountList.add(account);
             } while (cursor.moveToNext());
@@ -113,7 +114,7 @@ class DBHelper extends SQLiteOpenHelper {
 
         ContentValues values = new ContentValues();
         values.put(KEY_NAME, account.accountName);
-        values.put(KEY_AMOUNT, round(account.amount, 2));
+        values.put(KEY_AMOUNT, String.valueOf(round(account.amount)));
 
         // updating row
         return db.update(TABLE_ACCOUNTS, values, KEY_ID + " = ?",
@@ -138,12 +139,9 @@ class DBHelper extends SQLiteOpenHelper {
         return count;
     }
 
-    protected double round(double value, int places) {
-        if (places < 0) throw new IllegalArgumentException();
+    protected BigDecimal round(BigDecimal value) {
 
-        long factor = (long) Math.pow(10, places);
-        value = value * factor;
-        long tmp = Math.round(value);
-        return (double) tmp / factor;
+        value = value.setScale(2, BigDecimal.ROUND_HALF_EVEN);
+        return value;
     }
 }

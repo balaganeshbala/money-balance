@@ -1,46 +1,34 @@
 package in.balaganesh.moneybalance;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
-import android.os.PersistableBundle;
-import android.support.annotation.LayoutRes;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 class Account implements Serializable {
 
     protected String accountName;
-    protected double amount;
+    protected BigDecimal amount;
     protected int id;
 
     protected Account() {
         this.id = 0;
         this.accountName = new String();
-        this.amount = 0;
+        this.amount = new BigDecimal("0.0");
     }
 
-    protected Account(int id, String name, double amount) {
+    protected Account(int id, String name, String amount) {
         this.id = id;
         this.accountName = name;
-        this.amount = amount;
+        this.amount = new BigDecimal(amount);
     }
 }
 
@@ -83,13 +71,13 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private double getTotal() {
-        double total = 0.0;
+    private BigDecimal getTotal() {
+        BigDecimal total = new BigDecimal(0.0);
         for (Account account:
              accountList) {
-            total += account.amount;
+            total = total.add(account.amount);
         }
-        return dbHelper.round(total, 2);
+        return dbHelper.round(total);
     }
     
 

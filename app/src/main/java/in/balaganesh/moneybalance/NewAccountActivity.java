@@ -1,12 +1,10 @@
 package in.balaganesh.moneybalance;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class NewAccountActivity extends AppCompatActivity {
 
@@ -26,12 +24,14 @@ public class NewAccountActivity extends AppCompatActivity {
         String accountValue = accountField.getText().toString();
         String amountValue = amountField.getText().toString();
 
-        if (amountValue.trim().length() > 0 && !amountValue.equals(".") && Double.parseDouble(amountValue) != 0.0) {
-            Account newAccount = new Account(0, accountValue, Double.parseDouble(amountValue));
+        if (accountValue.trim().length() > 0 && amountValue.trim().length() > 0 && !amountValue.equals(".")) {
+            Account newAccount = new Account(0, accountValue, amountValue);
 
             DBHelper dbHelper = new DBHelper(this);
             dbHelper.addAccount(newAccount);
             finish();
+        } else {
+            Toast.makeText(this, "Invalid Value", Toast.LENGTH_SHORT).show();
         }
     }
 
